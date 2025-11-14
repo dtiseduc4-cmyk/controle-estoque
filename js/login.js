@@ -1,25 +1,18 @@
-// 🔒 Controle de Login
-const credenciais = {
-  usuario: "Admin",
-  senha: "T3cn0l0g1@dm1n"
-};
+import { auth } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-// Se já estiver logado, vai direto pro dashboard
-if (localStorage.getItem("usuarioLogado")) {
-  window.location.href = "index.html";
-}
+document.getElementById("loginBtn").addEventListener("click", async () => {
+    const email = email.value;
+    const senha = senha.value;
 
-// Evento de login
-document.getElementById("formLogin").addEventListener("submit", e => {
-  e.preventDefault();
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        const user = userCredential.user;
 
-  const usuario = document.getElementById("usuario").value.trim();
-  const senha = document.getElementById("senha").value.trim();
+        localStorage.setItem("uid", user.uid);
 
-  if (usuario === credenciais.usuario && senha === credenciais.senha) {
-    localStorage.setItem("usuarioLogado", usuario);
-    window.location.href = "index.html";
-  } else {
-    alert("Usuário ou senha incorretos!");
-  }
+        window.location.href = "index.html"; // página inicial do sistema
+    } catch (err) {
+        alert("Erro ao entrar: " + err.message);
+    }
 });
