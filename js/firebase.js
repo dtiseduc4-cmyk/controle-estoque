@@ -1,7 +1,8 @@
-// firebase.js
+// Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+// Config fornecida por você
 const firebaseConfig = {
   apiKey: "AIzaSyC1vYUwkyY2OzIvpVN9wLVhke-gKGZcNaU",
   authDomain: "controle-estoque-17051.firebaseapp.com",
@@ -12,5 +13,6 @@ const firebaseConfig = {
   measurementId: "G-DVSME1VHCT"
 };
 
+// Inicializa
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
