@@ -1,40 +1,17 @@
-import { auth, db } from "./firebase.js";
-import { 
-  signInWithEmailAndPassword 
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-import { 
-  doc, getDoc 
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
 
-// Login
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+    // Login fixo
+    const USER = "admin";
+    const PASS = "T3cn0l0g1@dmin";
 
-  const email = document.getElementById("email").value.trim();
-  const senha = document.getElementById("senha").value;
-
-  try {
-    // Autentica usuário
-    const cred = await signInWithEmailAndPassword(auth, email, senha);
-    const uid = cred.user.uid;
-
-    // Busca o nível de permissão no Firestore
-    const ref = doc(db, "users", uid);
-    const snap = await getDoc(ref);
-
-    if (snap.exists()) {
-      const role = snap.data().role || "operador";
-      localStorage.setItem("nivel", role);
+    if (email === USER && senha === PASS) {
+        localStorage.setItem("logado", "true");
+        window.location.href = "index.html";
     } else {
-      // Se não existir, assume operador
-      localStorage.setItem("nivel", "operador");
+        alert("Usuário ou senha incorretos!");
     }
-
-    // Redireciona para o sistema
-    window.location.href = "index.html";
-
-  } catch (error) {
-    alert("Erro ao fazer login: " + error.message);
-  }
 });
