@@ -1,18 +1,16 @@
 import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-    const email = email.value;
-    const senha = senha.value;
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-        const user = userCredential.user;
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
 
-        localStorage.setItem("uid", user.uid);
-
-        window.location.href = "index.html"; // página inicial do sistema
-    } catch (err) {
-        alert("Erro ao entrar: " + err.message);
-    }
+  try {
+    await signInWithEmailAndPassword(auth, email, senha);
+    window.location.href = "index.html";
+  } catch (error) {
+    alert("Erro ao fazer login: " + error.message);
+  }
 });
