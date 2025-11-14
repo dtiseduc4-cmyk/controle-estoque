@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Criar Usuário</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Criar Usuário</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="cadastro.html" class="active admin-only">Criar Usuário</a>
+  </nav>
+</header>
+
+<main>
+  <form id="formCadastro">
+    <input type="email" id="emailCadastro" placeholder="E-mail do usuário" required>
+    <input type="password" id="senhaCadastro" placeholder="Senha provisória" required>
+
+    <select id="nivel">
+      <option value="admin">Administrador</option>
+      <option value="operador">Operador</option>
+    </select>
+
+    <button type="submit">Criar Usuário</button>
+  </form>
+</main>
+
+<script type="module" src="auth.js"></script>
+<script type="module" src="cadastro.js"></script>
+
+</body>
+</html>
